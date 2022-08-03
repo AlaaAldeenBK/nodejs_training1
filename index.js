@@ -8,7 +8,8 @@ const starting = server.createServer((req,res) =>{
 const eEmit = new event();
 
 eEmit.on("onLunch",(request) =>{
-    console.log("Event With no parameter");
+    // console.log("Event With no parameter");
+    console.log(request.url);
 });
 
 // eEmit.on("onLunch",(x,y) =>{
