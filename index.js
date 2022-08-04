@@ -1,15 +1,34 @@
 const event = require("events");
 const server = require("http")
+const fs = require("fs").promises;
 const starting = server.createServer((req,res) =>{
-    eEmit.emit("onLunch", req);
+    // eEmit.emit("onLunch",res);
     res.write("Inside Server");
+    readContent(res);
+
     res.end();
+    
+    
+    
 });
 const eEmit = new event();
 
-eEmit.on("onLunch",(request) =>{
+
+
+
+
+
+
+
+
+
+
+
+eEmit.on("onLunch",(respons) =>{
     // console.log("Event With no parameter");
-    console.log(request.url);
+    // console.log(request.url);
+
+    
 });
 
 // eEmit.on("onLunch",(x,y) =>{
@@ -24,4 +43,21 @@ eEmit.on("onLunch",(request) =>{
 
 
 
-starting.listen("3000")
+starting.listen("3000");
+
+
+async function  readContent(respons)
+{
+    fs.readFile("namess.txt","utf8",(err,data)=>{
+        if(err)
+        {
+            console.log(err.message);
+            respons.end("Can not process your request");
+        }
+        else
+        {
+            respons.write(data);
+            // respons.end();
+        }
+    });
+}
